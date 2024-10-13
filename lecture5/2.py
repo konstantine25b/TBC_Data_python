@@ -59,3 +59,69 @@ log_dict = LoggingDict()
 log_dict['a'] = 1   # Logs the insertion of 'a': 1
 log_dict['b'] = 2   # Logs the insertion of 'b': 2
 log_dict.update({'c': 3})  # Logs the update of 'c': 3
+
+
+from collections import UserDict
+
+class AccessCountDict(UserDict):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.access_count = {}
+
+    def __getitem__(self, key):
+        # Increment access count for the key
+        if key in self.data:
+            self.access_count[key] = self.access_count.get(key, 0) + 1
+        return super().__getitem__(key)
+
+    def get_access_count(self, key):
+        # Return the access count for the key, defaulting to 0
+        return self.access_count.get(key, 0)
+
+# Client code
+access_dict = AccessCountDict()
+access_dict['x'] = 100   # Setting a key-value pair
+
+# Access the key 'x' multiple times
+print(access_dict['x'])   # Output: 100 (1st access)
+print(access_dict['x'])   # Output: 100 (2nd access)
+
+# Get the access count for 'x'
+print(access_dict.get_access_count('x'))  # Output: 2
+
+
+from collections.abc import MutableMapping
+
+class CustomMap(MutableMapping):
+    def __init__(self):
+        self.store = {}  # Internal dictionary to store the actual data
+    
+    def __getitem__(self, key):
+        # Always return 10, regardless of the actual value stored
+        return 10
+    
+    def __setitem__(self, key, value):
+        # Store the key-value pair in the internal dictionary
+        self.store[key] = value
+    
+    def __delitem__(self, key):
+        # Remove the key from the internal dictionary
+        del self.store[key]
+    
+    def __iter__(self):
+        # Return an iterator over the dictionary keys
+        return iter(self.store)
+    
+    def __len__(self):
+        # Return the number of items in the dictionary
+        return len(self.store)
+
+# Client code
+custom_map = CustomMap()
+
+# Adding a key-value pair to the CustomMap
+custom_map['a'] = 10
+
+# Accessing the key 'a'
+print(custom_map['a'])  # Output: 10 (because __getitem__ always returns 10)
+

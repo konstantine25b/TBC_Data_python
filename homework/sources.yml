@@ -1,0 +1,39 @@
+version: 2
+
+sources:
+  - name: parquet_input
+    meta:
+      external_location: "read_parquet('/home/simplify/Desktop/dbt/simplify/shared/parquet/{name}.parquet')" # needs to uses env variable
+    tables:
+      - name: sales_transactions
+        columns:
+          - name: Order ID
+            data_type: string
+            description: "Unique identifier for each order."
+          - name: Order Date
+            data_type: date
+            description: "Date when the order was placed."
+          - name: Ship Date
+            data_type: date
+            description: "Date when the order was shipped."
+          - name: Sales
+            data_type: float
+            description: "Total sales amount for the order."
+          - name: Quantity
+            data_type: integer
+            description: "Total quantity of items sold in the order."
+          - name: Discount
+            data_type: float
+            description: "Discount applied to the order, if any."
+          - name: Profit
+            data_type: float
+            description: "Profit made from the order after costs."
+          - name: Customer Name
+            data_type: string
+            description: "Name of the customer who placed the order."
+          - name: Segment
+            data_type: string
+            description: "Market segment to which the customer belongs."
+          - name: Country
+            data_type: string
+            description: "Country where the customer is located."

@@ -1,0 +1,31 @@
+version: 2
+
+sources:
+  - name: parquet_input
+    meta:
+      external_location: "read_parquet('/home/simplify/Desktop/dbt/simplify/shared/parquet/{name}.parquet')" # uses environment variable
+    tables:
+      - name: customer_transactions
+        description: "Table containing transaction details including customer, product, and sales channel information."
+        columns:
+          - name: transaction_id
+            data_type: integer
+            description: "Unique identifier for each transaction."
+          - name: customer_id
+            data_type: integer
+            description: "Unique identifier for each customer."
+          - name: product_id
+            data_type: string
+            description: "Unique identifier for the product involved in the transaction."
+          - name: amount
+            data_type: float
+            description: "Total amount for the transaction."
+          - name: qty
+            data_type: integer
+            description: "Quantity of the product sold in the transaction."
+          - name: channel_id
+            data_type: integer
+            description: "Identifier for the sales channel through which the sale was made."
+          - name: bought_date
+            data_type: date
+            description: "Date when the transaction occurred in YYYY-MM-DD format."

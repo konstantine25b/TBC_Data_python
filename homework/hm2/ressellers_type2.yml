@@ -1,0 +1,53 @@
+version: 2
+
+sources:
+  - name: parquet_input
+    meta:
+      external_location: "read_parquet('/home/simplify/Desktop/dbt/simplify/shared/parquet/{name}.parquet')" # uses environment variable
+    tables:
+      - name: transaction_data
+        description: "Table containing details of transactions including reseller, product, customer, and sales information."
+        columns:
+          - name: date
+            data_type: date
+            description: "Transaction date in YYYYMMDD format."
+          - name: reseller-id
+            data_type: integer
+            description: "Unique identifier for the reseller."
+          - name: productName
+            data_type: string
+            description: "Name of the product sold in the transaction."
+          - name: qty
+            data_type: integer
+            description: "Quantity of the product sold."
+          - name: totalAmount
+            data_type: float
+            description: "Total amount for the transaction."
+          - name: salesChannel
+            data_type: string
+            description: "Channel through which the sale was made (e.g., web, mobile app, in-store)."
+          - name: customer
+            data_type: struct
+            description: "Customer information including email, firstname, and lastname."
+            fields:
+              - name: email
+                data_type: string
+                description: "Customer's email address."
+              - name: firstname
+                data_type: string
+                description: "Customer's first name."
+              - name: lastname
+                data_type: string
+                description: "Customer's last name."
+          - name: dateCreated
+            data_type: date
+            description: "Date when the transaction record was created."
+          - name: seriesCity
+            data_type: string
+            description: "City associated with the product series."
+          - name: Created Date
+            data_type: date
+            description: "Formatted creation date in YYYY-MM-DD."
+          - name: transactionID
+            data_type: integer
+            description: "Unique identifier for each transaction."

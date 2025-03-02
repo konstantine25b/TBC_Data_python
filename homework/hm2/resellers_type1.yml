@@ -1,0 +1,43 @@
+version: 2
+
+sources:
+  - name: parquet_input
+    meta:
+      external_location: "read_parquet('/home/simplify/Desktop/dbt/simplify/shared/parquet/{name}.parquet')" # uses environment variable
+    tables:
+      - name: reseller_transactions
+        description: "Table containing details of reseller transactions including product, customer, and sales information."
+        columns:
+          - name: Product name
+            data_type: string
+            description: "Name of the product sold in the transaction."
+          - name: Quantity
+            data_type: integer
+            description: "Quantity of the product sold."
+          - name: Total amount
+            data_type: float
+            description: "Total amount for the transaction."
+          - name: Sales Channel
+            data_type: string
+            description: "Channel through which the sale was made (e.g., web, mobile app, in-store)."
+          - name: Customer First Name
+            data_type: string
+            description: "Customer's first name."
+          - name: Customer Last Name
+            data_type: string
+            description: "Customer's last name."
+          - name: Customer Email
+            data_type: string
+            description: "Customer's email address."
+          - name: Series City
+            data_type: string
+            description: "City associated with the product series."
+          - name: Created Date
+            data_type: date
+            description: "Date when the transaction was created in YYYY-MM-DD format."
+          - name: Reseller ID
+            data_type: integer
+            description: "Unique identifier for the reseller involved in the transaction."
+          - name: Transaction ID
+            data_type: integer
+            description: "Unique identifier for each transaction."

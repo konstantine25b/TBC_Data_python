@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: parquet_input
+    meta:
+      external_location: "read_parquet('/home/simplify/Desktop/dbt/simplify/shared/parquet/{name}.parquet')" # uses environment variable
+    tables:
+      - name: sales_channels
+        description: "Table containing details of sales channels including channel ID and name."
+        columns:
+          - name: channel_name
+            data_type: string
+            description: "Name of the sales channel (e.g., in-store, web, mobile app)."
+          - name: channel_id
+            data_type: integer
+            description: "Unique identifier for each sales channel."

@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: parquet_input
+    meta:
+      external_location: "read_parquet('/home/simplify/Desktop/dbt/simplify/shared/parquet/{name}.parquet')" # uses environment variable
+    tables:
+      - name: reseller_data
+        description: "Table containing reseller details and commission information."
+        columns:
+          - name: reseller_id
+            data_type: integer
+            description: "Unique identifier for each reseller."
+          - name: reseller_name
+            data_type: string
+            description: "Name of the reseller company."
+          - name: commission_pct
+            data_type: float
+            description: "Commission percentage associated with each reseller."
